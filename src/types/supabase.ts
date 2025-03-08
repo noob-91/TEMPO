@@ -9,6 +9,145 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      annotation_votes: {
+        Row: {
+          annotation_id: string
+          created_at: string | null
+          id: string
+          user_id: string
+          vote_type: string
+        }
+        Insert: {
+          annotation_id: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+          vote_type: string
+        }
+        Update: {
+          annotation_id?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+          vote_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "annotation_votes_annotation_id_fkey"
+            columns: ["annotation_id"]
+            isOneToOne: false
+            referencedRelation: "annotations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      annotations: {
+        Row: {
+          confidence: string
+          created_at: string | null
+          end_index: number
+          id: string
+          justification: string | null
+          selected_text: string
+          start_index: number
+          text_id: string
+          type: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          confidence: string
+          created_at?: string | null
+          end_index: number
+          id?: string
+          justification?: string | null
+          selected_text: string
+          start_index: number
+          text_id: string
+          type: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          confidence?: string
+          created_at?: string | null
+          end_index?: number
+          id?: string
+          justification?: string | null
+          selected_text?: string
+          start_index?: number
+          text_id?: string
+          type?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "annotations_text_id_fkey"
+            columns: ["text_id"]
+            isOneToOne: false
+            referencedRelation: "legal_texts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      legal_texts: {
+        Row: {
+          author: string | null
+          book_no: string | null
+          category: string | null
+          content: string | null
+          created_at: string | null
+          date: string | null
+          header: string | null
+          id: string
+          passage_no: string | null
+          section_no: string | null
+          source: string | null
+          text: string | null
+          text_id: string
+          textunit_no: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          author?: string | null
+          book_no?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string | null
+          date?: string | null
+          header?: string | null
+          id?: string
+          passage_no?: string | null
+          section_no?: string | null
+          source?: string | null
+          text?: string | null
+          text_id: string
+          textunit_no?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          author?: string | null
+          book_no?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string | null
+          date?: string | null
+          header?: string | null
+          id?: string
+          passage_no?: string | null
+          section_no?: string | null
+          source?: string | null
+          text?: string | null
+          text_id?: string
+          textunit_no?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           avatar_url: string | null

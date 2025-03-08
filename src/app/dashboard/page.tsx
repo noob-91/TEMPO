@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "../../../supabase/server";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import SignOutButton from "@/components/sign-out-button";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -92,7 +93,7 @@ export default async function Dashboard() {
               <section className="bg-white rounded-xl p-6 border shadow-sm">
                 <h2 className="font-semibold text-xl mb-6">Quick Actions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <Link href="/dashboard/texts">
+                  <Link href="/dashboard/search">
                     <Button
                       variant="outline"
                       className="w-full h-auto py-6 flex flex-col items-center justify-center gap-2 border-gray-200 hover:border-sky-300 hover:bg-sky-50"
@@ -107,7 +108,7 @@ export default async function Dashboard() {
                       className="w-full h-auto py-6 flex flex-col items-center justify-center gap-2 border-gray-200 hover:border-sky-300 hover:bg-sky-50"
                     >
                       <BookOpen className="h-6 w-6 text-blue-600" />
-                      <span>Browse Collection</span>
+                      <span>Browse Texts</span>
                     </Button>
                   </Link>
                   <Button
@@ -165,7 +166,17 @@ export default async function Dashboard() {
               {/* User Profile Section */}
               <section className="bg-white rounded-xl p-6 border shadow-sm">
                 <div className="flex items-center gap-4 mb-6">
-                  <UserCircle size={48} className="text-blue-600" />
+                  {user.user_metadata?.avatar_url ? (
+                    <div className="h-16 w-16 rounded-full overflow-hidden">
+                      <img
+                        src={`${user.user_metadata.avatar_url.split("?")[0]}?t=${Date.now()}`}
+                        alt="Profile"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <UserCircle size={48} className="text-blue-600" />
+                  )}
                   <div>
                     <h2 className="font-semibold text-xl">
                       {user.user_metadata?.full_name || "Scholar Profile"}
@@ -198,6 +209,7 @@ export default async function Dashboard() {
                       Edit Profile
                     </Button>
                   </Link>
+                  <SignOutButton />
                 </div>
               </section>
 

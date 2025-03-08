@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { UserCircle, Upload, ArrowLeft, LogOut } from "lucide-react";
+import { UserCircle, ArrowLeft } from "lucide-react";
+import ProfilePhotoUpload from "@/components/profile-photo-upload";
 import { redirect } from "next/navigation";
 import { createClient } from "../../../../supabase/server";
 import Link from "next/link";
+import SignOutButton from "@/components/sign-out-button";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -49,13 +51,7 @@ export default async function ProfilePage() {
                     <UserCircle className="w-20 h-20 text-blue-600" />
                   )}
                   <div className="absolute -bottom-2 -right-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="rounded-full w-8 h-8 p-0"
-                    >
-                      <Upload className="h-4 w-4" />
-                    </Button>
+                    <ProfilePhotoUpload />
                   </div>
                 </div>
                 <p className="text-sm text-gray-500">Upload Profile Picture</p>
@@ -152,16 +148,7 @@ export default async function ProfilePage() {
           <div className="bg-white rounded-xl p-6 border shadow-sm">
             <h2 className="text-xl font-semibold mb-4">Account Actions</h2>
             <div className="space-y-4">
-              <form action="/api/auth/signout" method="post">
-                <Button
-                  type="submit"
-                  variant="outline"
-                  className="border-red-200 text-red-600 hover:bg-red-50 flex items-center gap-2"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>Sign Out</span>
-                </Button>
-              </form>
+              <SignOutButton />
             </div>
           </div>
         </div>

@@ -2,22 +2,10 @@
 
 import Link from "next/link";
 import { createClient } from "../../supabase/client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import {
-  UserCircle,
-  Home,
-  BookOpen,
-  Search,
-  BookMarked,
-  Settings,
-} from "lucide-react";
+import { Home, BookOpen, Search, BookMarked } from "lucide-react";
 import { useRouter } from "next/navigation";
+import UserProfile from "./user-profile";
 
 export default function DashboardNavbar() {
   const supabase = createClient();
@@ -42,54 +30,22 @@ export default function DashboardNavbar() {
             <span>Dashboard</span>
           </Link>
           <Link
-            href="#"
-            className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600"
+            href="/dashboard/search"
+            className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all"
           >
             <Search className="h-4 w-4" />
             <span>Search Texts</span>
           </Link>
           <Link
-            href="#"
-            className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600"
+            href="/dashboard/texts"
+            className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all"
           >
             <BookMarked className="h-4 w-4" />
-            <span>My Annotations</span>
+            <span>Browse Texts</span>
           </Link>
         </div>
 
-        <div className="flex gap-4 items-center">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-blue-600 hover:text-blue-800 hover:bg-sky-50"
-              >
-                <UserCircle className="h-6 w-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>
-                <Link href="/dashboard/profile" className="flex w-full">
-                  Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="#" className="flex w-full">
-                  Settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  router.refresh();
-                }}
-              >
-                Sign out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        {/* Profile button removed */}
       </div>
     </nav>
   );

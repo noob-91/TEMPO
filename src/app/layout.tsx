@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import { TempoInit } from "@/components/tempo-init";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-screen">
+                Loading...
+              </div>
+            }
+          >
+            {children}
+          </Suspense>
         </ThemeProvider>
         <TempoInit />
       </body>
